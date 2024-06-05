@@ -1,0 +1,50 @@
+assetArgs: &asset-args
+  assets: 10
+  contractId: asset-transfer-basic
+  numberOfAccounts: &number-of-accounts 2000
+
+test:
+  name: asset-transfer
+  description: Test benchmark for asset transfer
+  workers:
+    number: 20
+  rounds:
+    - label: createAsset
+      description: Create asset benchmark
+      txNumber: *number-of-accounts
+      rateControl:
+        type: fixed-load
+        opts:
+          tps: 400
+      workload:
+        module: asset.js
+        arguments: *asset-args
+    - label: readAsset
+      description: Read asset benchmark
+      txNumber: *number-of-accounts
+      rateControl:
+        type: fixed-load
+        opts:
+          tps: 400
+      workload:
+        module: asset.js
+        arguments: *asset-args
+    - label: deleteAsset
+      description: Delete asset benchmark
+      txNumber: *number-of-accounts
+      rateControl:
+        type: fixed-load
+        opts:
+          tps: 400
+      workload:
+        module: asset.js
+        arguments: *asset-args
+monitors:
+  resource:
+  - module: process
+    options:
+      interval: 3
+      processes: [{ command: 'node', arguments: 'caliper', multiOutput: 'avg' }]
+      charting:
+        bar:
+          metrics: [all]

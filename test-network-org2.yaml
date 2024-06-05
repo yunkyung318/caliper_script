@@ -1,0 +1,39 @@
+name: Caliper Benchmarks
+version: "2.0.0"
+
+caliper:
+  blockchain: fabric
+
+channels:
+  # channelName of mychannel matches the name of the channel created by test network
+  - channelName: mychannel
+    # the chaincodeIDs of all the fabric chaincodes in caliper-benchmarks
+    contracts:
+    - id: asset-transfer-basic
+            #- id: fabcar
+            # - id: fixed-asset
+            #- id: marbles
+      #- id: smallbank
+      #
+
+organizations:
+  - mspid: Org2MSP
+    # Identities come from cryptogen created material for test-network
+    identities:
+      certificates:
+      - name: 'test-network-org2'
+        clientPrivateKey:
+          path: '/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/fabric-rest-sample-config/HLF_PRIVATE_KEY_ORG2'
+          #'/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/enrollments/org2/users/org1admin/msp/keystore/key.pem'
+          #'/data/org0/fabric/organizations/peerOrganizations/org2.example.com/peers/org1-peer1.org1.example.com/msp/keystore/8f4faf5890f9d3756b3abe85ac1621ddb84a1068ad1275dd211c97ce50963ad8_sk'
+          #/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/enrollments/org2/users/rcaadmin/msp/keystore/c8e6695b6c8f7543d6bab9ebee27acc50c79506f868ed0e9884c45eb5b9f8b9c_sk'
+        clientSignedCert:
+          path: '/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/fabric-rest-sample-config/HLF_CERTIFICATE_ORG2'
+          #'/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/channel-msp/peerOrganizations/org2/msp/tlscacerts/tlsca-signcert.pem'
+          #'/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/enrollments/org2/users/org1admin/msp/signcerts/cert.pem'
+          #'/data/org0/fabric/organizations/peerOrganizations/org2.example.com/peers/org1-peer1.org1.example.com/msp/signcerts/cert.pem'
+          #/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/enrollments/org2/users/rcaadmin/msp/signcerts/cert.pem'
+    connectionProfile:
+      path: '/home/con2/go/src/github.com/yunkyung318/fabric-samples/test-network-k8s/build/fabric-rest-sample-config/HLF_CONNECTION_PROFILE_ORG2'
+      discover: true
+
